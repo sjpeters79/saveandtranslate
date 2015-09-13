@@ -140,10 +140,10 @@ function save_and_translate_add_translation_url_($node) {
     $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
     $server_name = $_SERVER['SERVER_NAME'];
     if ('en' == $node->translations->original) {
-      return array('translation_path' => url($http . '://' . $server_name . '/fr/node/' . $node->nid . '/edit/add/en/fr'));
+      return array('translation_path' => url($http . '://' . $server_name . ':8080/fr/node/' . $node->nid . '/edit/add/en/fr'));
     }
     else {
-      return array('translation_path' => url($http . '://' . $server_name . '/en/node/' . $node->nid . '/edit/add/fr/en'));
+      return array('translation_path' => url($http . '://' . $server_name . ':8080/en/node/' . $node->nid . '/edit/add/fr/en'));
     }
   }
 }
@@ -156,8 +156,7 @@ function save_and_translate_redirect_preview_($node) {
     $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
     $server_name = $_SERVER['SERVER_NAME'];
     $lang = $node->translations->original;
-    //'/node/' . $node->nid removed and redirect to manage myevents instead
-    return array('preview_path' => url($http . '://' . $server_name . '/' . $lang . '/manage/myevents'));
+    return array('preview_path' => url($http . '://' . $server_name . ':8080/' . $lang . '/node/' . $node->nid));
   }
 }
 
