@@ -7,9 +7,9 @@
 /*
  * Implementation of hook_condition_info()
  */
-function save_and_translate_rules_condition_info() {
+function saveandtranslate_rules_condition_info() {
   return array(
-    'save_and_translate_is_it_translated' => array(
+    'saveandtranslate_is_it_translated' => array(
       'label' => t('Is the node translated?'),
       'parameter' => array(
         'node' => array(
@@ -23,7 +23,7 @@ function save_and_translate_rules_condition_info() {
 }
 
 
-function save_and_translate_is_it_translated($node) {
+function saveandtranslate_is_it_translated($node) {
   //check to make sure it's translated and was just created ie does not have a changed date set
   $translations = $node->translations->data;
   unset($translations[$node->translations->original]);
@@ -42,9 +42,9 @@ function save_and_translate_is_it_translated($node) {
 /**
  * Implements hook_rules_action_info().
  */
-function save_and_translate_rules_action_info() {
+function saveandtranslate_rules_action_info() {
   return array(
-    'save_and_translate_add_translation_url_' => array(
+    'saveandtranslate_add_translation_url_' => array(
       'label' => t('Get the path to add a translation'),
       'group' => t('Colfront Labs Inc'),
       'parameter' => array(
@@ -61,7 +61,7 @@ function save_and_translate_rules_action_info() {
         ),
       ),
     ),
-    'save_and_translate_redirect_preview_' => array(
+    'saveandtranslate_redirect_preview_' => array(
       'label' => t('Get the path to add to preview the translated node'),
       'group' => t('Colfront Labs Inc'),
       'parameter' => array(
@@ -78,7 +78,7 @@ function save_and_translate_rules_action_info() {
         ),
       ),
     ),
-    'save_and_translate_set_as_translated_' => array(
+    'saveandtranslate_set_as_translated_' => array(
       'label' => t('Set the translated item as translated'),
       'group' => t('Colfront Labs Inc'),
       'parameter' => array(
@@ -95,7 +95,7 @@ function save_and_translate_rules_action_info() {
         ),
       ),
     ),
-    'save_and_translate_update_translation_status_' => array(
+    'saveandtranslate_update_translation_status_' => array(
       'label' => t('Set the translation status to be the same as the event status'),
       'group' => t('Colfront Labs Inc'),
       'parameter' => array(
@@ -119,7 +119,7 @@ function save_and_translate_rules_action_info() {
  * Custom rule to set a translated item as translated
  * @param $itemId
  */
-function save_and_translate_set_as_translated_($itemId) {
+function saveandtranslate_set_as_translated_($itemId) {
 
   //load the job
   if ($job = tmgmt_job_item_load($itemId)) {
@@ -135,7 +135,7 @@ function save_and_translate_set_as_translated_($itemId) {
 /**
  * Custom rule action callback to get the add translation path
  */
-function save_and_translate_add_translation_url_($node) {
+function saveandtranslate_add_translation_url_($node) {
   if (isset($node->translations->original)) {
     $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
     $server_name = $_SERVER['SERVER_NAME'];
@@ -151,7 +151,7 @@ function save_and_translate_add_translation_url_($node) {
 /**
  * Custom rule action callback to get the add translation path
  */
-function save_and_translate_redirect_preview_($node) {
+function saveandtranslate_redirect_preview_($node) {
   if (isset($node->translations->original)) {
     $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
     $server_name = $_SERVER['SERVER_NAME'];
@@ -160,7 +160,7 @@ function save_and_translate_redirect_preview_($node) {
   }
 }
 
-function save_and_translate_update_translation_status_($node) {
+function saveandtranslate_update_translation_status_($node) {
   db_update('entity_translation')
     ->fields(array('status' => $node->status))
     ->condition('entity_id', $node->nid)

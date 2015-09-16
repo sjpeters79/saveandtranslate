@@ -7,5 +7,3 @@ dependencies[] = rules_i18n
 dependencies[] = views_rules
 dependencies[] = tmgmt
 features[features_api][] = api:2
-features[rules_config][] = save_and_translate_save_and_translate
-features[rules_config][] = save_and_translate_redirect_preview
